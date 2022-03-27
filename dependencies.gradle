@@ -1,0 +1,44 @@
+ext {
+    libraries = [
+            'dagger'     : [
+                    'impl': [
+                            "com.google.dagger:dagger-android:2.29.1",
+                            "com.google.dagger:dagger-android-support:2.29.1"
+                    ],
+                    'kapt': [
+                            "com.google.dagger:dagger-android-processor:2.29.1",
+                            "com.google.dagger:dagger-compiler:2.29.1"
+                    ]
+            ],
+            'kotlin'     : [
+                    "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+            ],
+            'androidx'   : [
+                    "androidx.legacy:legacy-support-v4:1.0.0",
+                    'androidx.core:core-ktx:1.7.0',
+                    'androidx.constraintlayout:constraintlayout:2.1.2',
+                    'androidx.appcompat:appcompat:1.4.0',
+                    'com.google.android.material:material:1.4.0'
+            ],
+            'network'    : [
+                    'com.squareup.retrofit2:retrofit:2.9.0',
+                    'com.squareup.retrofit2:converter-gson:2.9.0',
+                    "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+            ],
+            'logger'     : [
+                    "com.squareup.okhttp3:logging-interceptor:4.9.0"
+            ],
+            'lifecycle'  : [
+                    "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0",
+                    "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
+            ],
+            'picasso'    : [
+                    'com.squareup.picasso:picasso:2.71828'
+            ],
+            'junit'       : [
+                    'junit:junit:4.13',
+                    'org.junit.jupiter:junit-jupiter-api:5.6.0',
+                    'org.junit.jupiter:junit-jupiter-params:5.6.0'
+            ]
+    ]
+}
