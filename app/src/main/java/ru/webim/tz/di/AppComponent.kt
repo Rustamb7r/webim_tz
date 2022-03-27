@@ -4,11 +4,6 @@ import android.app.Application
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import ru.webim.tz.di.auth.AuthComponent
-import ru.webim.tz.di.core.CoreModule
-import ru.webim.tz.di.core.NetworkModule
-import ru.webim.tz.di.core.SubComponentsModule
-import ru.webim.tz.di.list.TicketListComponent
 import javax.inject.Singleton
 
 @Singleton
@@ -16,11 +11,10 @@ import javax.inject.Singleton
     modules = [
         NetworkModule::class,
         CoreModule::class,
-        SubComponentsModule::class
+        Module::class
     ]
 )
 interface AppComponent {
-
     @Component.Factory
     interface Factory {
         fun create(

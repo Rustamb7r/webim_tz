@@ -1,20 +1,20 @@
 package ru.webim.tz.interactors
 
 import android.util.Log
-import ru.webim.tz.data.cache.abstraction.TicketsCacheDataSource
-import ru.webim.tz.data.network.AviaService
-import ru.webim.tz.data.network.model.toTickets
-import ru.webim.tz.domain.model.Ticket
+import ru.webim.tz.stash.source.TicketsCacheSource
+import ru.webim.tz.web.AviaIntService
+import ru.webim.tz.web.toTickets
+import ru.webim.tz.model.TicketParameter
 import javax.inject.Inject
 
 class GetTicketList @Inject constructor(
-    private val ticketsCacheDataSource: TicketsCacheDataSource,
-    private val aviaService: AviaService,
-    private val getUserToken: GetUserToken
+    private val ticketsCacheDataSource: TicketsCacheSource,
+    private val aviaService: AviaIntService,
+    private val getUserToken: Token
 ) {
     private val TAG = "GetTicketList"
 
-    suspend fun load(): List<Ticket>? {
+    suspend fun load(): List<TicketParameter>? {
         return try {
             getNetworkTicketsAndSave()
         } catch (e: Exception) {
@@ -23,7 +23,7 @@ class GetTicketList @Inject constructor(
         }
     }
 
-    private suspend fun getNetworkTicketsAndSave(): List<Ticket>? {
+    private suspend fun getNetworkTicketsAndSave(): List<TicketParameter>? {
         val tickets = aviaService.getTicketList(getUserToken.get() ?: "").ticketList?.toTickets()
         if (tickets?.isNotEmpty() == true) {
             ticketsCacheDataSource.insertTickets(tickets)
@@ -31,12 +31,12 @@ class GetTicketList @Inject constructor(
         return tickets
     }
 
-    private suspend fun getCachedTickets(): List<Ticket>? {
+    private suspend fun getCachedTickets(): List<TicketParameter>? {
         return try {
             ticketsCacheDataSource.getTickets()
         } catch (e: java.lang.Exception) {
             Log.w(TAG, e)
-            emptyList<Ticket>()
+            emptyList<TicketParameter>()
         }
     }
 }
